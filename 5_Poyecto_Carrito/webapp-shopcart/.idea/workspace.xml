@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca467526-c8f3-4a3a-836c-8a279bfe34ba" name="Changes" comment="" />
+    <list default="true" id="ca467526-c8f3-4a3a-836c-8a279bfe34ba" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/filters/LoginFiltro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/listener/AplicacionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/AgregarCarroServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/AgregarCarroServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controllers/ProductoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controllers/ProductoServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/controllers/AgregarCarroServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/controllers/AgregarCarroServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/controllers/ProductoServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/controllers/ProductoServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/models/Carrito.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/models/Carrito.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/models/ItemaCarro.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/models/ItemaCarro.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/webapp-shopcart-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp-shopcart-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/webapp-shopcart-1.0-SNAPSHOT/WEB-INF/classes/org/example/controllers/AgregarCarroServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp-shopcart-1.0-SNAPSHOT/WEB-INF/classes/org/example/controllers/AgregarCarroServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/webapp-shopcart-1.0-SNAPSHOT/WEB-INF/classes/org/example/controllers/ProductoServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp-shopcart-1.0-SNAPSHOT/WEB-INF/classes/org/example/controllers/ProductoServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/webapp-shopcart-1.0-SNAPSHOT/WEB-INF/classes/org/example/models/Carrito.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp-shopcart-1.0-SNAPSHOT/WEB-INF/classes/org/example/models/Carrito.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/webapp-shopcart-1.0-SNAPSHOT/WEB-INF/classes/org/example/models/ItemaCarro.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp-shopcart-1.0-SNAPSHOT/WEB-INF/classes/org/example/models/ItemaCarro.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/webapp-shopcart-1.0-SNAPSHOT/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/webapp-shopcart-1.0-SNAPSHOT/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,15 +31,19 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2ZNbAcEBwv6Lu29X2q7B2Rza3GY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -30,7 +52,8 @@
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
   }
 }]]></component>
   <component name="RunManager">
@@ -80,5 +103,16 @@
       <updated>1702265341570</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

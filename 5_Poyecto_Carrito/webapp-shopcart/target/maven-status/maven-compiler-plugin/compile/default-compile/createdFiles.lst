@@ -3,12 +3,14 @@ org\example\service\ProductoServiceImpl.class
 org\example\controllers\VerCarroServlet.class
 org\example\models\Carrito.class
 org\example\service\ProductoService.class
+org\example\filters\LoginFiltro.class
 org\example\controllers\LogoutServlet.class
 org\example\service\LoginServiceCookie.class
 org\example\controllers\ProductoServlet.class
 org\example\Main.class
 org\example\models\ItemaCarro.class
 org\example\service\LoginService.class
+org\example\listener\AplicacionListener.class
 org\example\models\Producto.class
 org\example\controllers\AgregarCarroServlet.class
 org\example\controllers\LoginServlet.class

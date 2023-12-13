@@ -25,6 +25,10 @@ public class ProductoServlet extends HttpServlet {
         LoginService auth = new LoginServiceSesionImpl();
         Optional<String> sesionUsername = auth.getUsername(request);
 
+        //obteniendo el mensaje de la sesion
+        String message = (String) request.getAttribute("message");
+        String messageGlobal = (String) getServletContext().getAttribute("message");
+
         response.setContentType("text/html;charset=UTF-8");
 
         try (PrintWriter out = response.getWriter()) {
@@ -66,6 +70,8 @@ public class ProductoServlet extends HttpServlet {
             }
             out.println("           </tbody>");
             out.println("       </table>");
+            out.print("       <p>"+ message +"</p>");
+            out.print("       <p>"+ messageGlobal +"</p>");
             out.println("   </body>");
             out.println("</html>");
         }
