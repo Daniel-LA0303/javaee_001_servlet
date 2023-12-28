@@ -3,12 +3,12 @@ package org.example.controllers;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import org.example.service.LoginService;
-import org.example.service.LoginServiceCookie;
-import org.example.service.LoginServiceSesionImpl;
+import org.example.models.Usuario;
+import org.example.service.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.Optional;
 
 @WebServlet({"/login", "/login.html"})
@@ -57,7 +57,11 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username"); //obtenemos el valor del parámetro username
         String password = request.getParameter("password"); //obtenemos el valor del parámetro password
 
-        if (username.equals(USERNAME) && password.equals(PASSWORD)) { //si el usuario y la contraseña son correctos
+        //comprobamos si el usuario y la contraseña son correctos
+        UsuarioService usuarioService = new UsuarioServiceImpl((Connection) request.getAttribute("conn"));
+        Optional<Usuario> usuario = usuarioService.login(username, password);
+
+        if (usuario.isPresent()) { //si el usuario y la contraseña son correctos
             //Sesiones
             HttpSession sesion =  request.getSession();
             sesion.setAttribute("username", username);

@@ -4,7 +4,9 @@ import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.util.ConexionDB;
+import org.example.util.ConexionDBDS;
 
+import javax.naming.NamingException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -18,7 +20,7 @@ public class ConexionFilter implements Filter {
             throws IOException, ServletException {
 
 
-        try(Connection conn = ConexionDB.getConnection()) {
+        try(Connection conn = ConexionDBDS.getConnection()) {
             System.out.println("Filtro ejecutado. Conn: " + conn);
 
 
@@ -36,7 +38,7 @@ public class ConexionFilter implements Filter {
                 e.printStackTrace();
             }
 
-        } catch (SQLException throwables) {
+        } catch (SQLException | NamingException throwables) {
             throwables.printStackTrace();
         }
     }
