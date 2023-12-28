@@ -1,51 +1,47 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Listado</title>
-</head>
-<body>
-    <h1>Listado de productos</h1>
+<jsp:include page="layout/header.jsp"/>
 
-    <c:if test="${username.present}">
-        <div>Hola, <c:out value="${username.get()}"/></div>
-        <a href="${pageContext.request.contextPath}/producto/form">Agregar producto</a>
-    </c:if>
+        <h1 class="mt-5">Listado de productos</h1>
 
-    <table>
-        <tr>
-            <td>Id</td>
-            <td>Nombre</td>
-            <td>Tipo</td>
-            <c:if test="${username.present}">
-                <td>Precio</td>
-                <td>Agregar</td>
-                <td>Editar</td>
-            </c:if>
-        </tr>
+        <c:if test="${username.present}">
+            <div class="alert alert-success">Hola, <c:out value="${username.get()}"/></div>
+            <a class="btn btn-primary" href="${pageContext.request.contextPath}/producto/form">Agregar producto</a>
+        </c:if>
 
-        <c:forEach var="p" items="${productos}">
+        <table class="table table-hover table-striped mt-3">
             <tr>
-                <td><c:out value="${p.id}"/></td>
-                <td><c:out value="${p.nombre}"/></td>
-                <td><c:out value="${p.categoria.nombre}"/></td>
+                <td>Id</td>
+                <td>Nombre</td>
+                <td>Tipo</td>
                 <c:if test="${username.present}">
-                    <td><c:out value="${p.precio}"/></td>
-                    <td><a href="${pageContext.request.contextPath}/agregar-carro?id=<c:out value="${p.id}"/>">Agregar al carrito</a></td>
-                    <td><a href="${pageContext.request.contextPath}/producto/form?id=<c:out value="${p.id}"/>">Editar</a></td>
-                    <td>
-                        <a onclick="return confirm('¿Estás seguro de eliminar el producto?');"
-                           href="${pageContext.request.contextPath}/producto/eliminar?id=<c:out value="${p.id}"/>">Eliminar</a>
-                    </td>
+                    <td>Precio</td>
+                    <td>Agregar</td>
+                    <td>Editar</td>
+                    <td>Eliminar</td>
                 </c:if>
             </tr>
-        </c:forEach>
-    </table>
 
-    <p>${applicationScope.message}</p>
-    <p>${requestScope.message}</p>
-</body>
-</html>
+            <c:forEach var="p" items="${productos}">
+                <tr>
+                    <td><c:out value="${p.id}"/></td>
+                    <td><c:out value="${p.nombre}"/></td>
+                    <td><c:out value="${p.categoria.nombre}"/></td>
+                    <c:if test="${username.present}">
+                        <td><c:out value="${p.precio}"/></td>
+                        <td><a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/agregar-carro?id=<c:out value="${p.id}"/>">Agregar al carrito</a></td>
+                        <td><a class="btn btn-sm btn-success" href="${pageContext.request.contextPath}/producto/form?id=<c:out value="${p.id}"/>">Editar</a></td>
+                        <td>
+                            <a class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar el producto?');"
+                            href="${pageContext.request.contextPath}/producto/eliminar?id=<c:out value="${p.id}"/>">Eliminar</a>
+                        </td>
+                    </c:if>
+                </tr>
+            </c:forEach>
+        </table>
+
+        <p>${applicationScope.message}</p>
+        <p>${requestScope.message}</p>
+
+<jsp:include page="layout/footer.jsp"/>

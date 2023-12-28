@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
                 out.println("   <body>");
                 out.println("       <h1>Login correcto con sesion!!!!</h1>");
                 out.println("       <p>Usuario: " + sesionUsername.get() + " has inicado sesion con exito" +"</p>");
-                out.println("       <p><a href='" + req.getContextPath() + "/index.html'>Volver </a></p>");
+                out.println("       <p><a href='" + req.getContextPath() + "/index.jsp'>Volver </a></p>");
                 //boton para cerrar sesion
                 out.println("       <p><a href='" + req.getContextPath() + "/logout'>Cerrar sesion</a></p>");
                 out.println("   </body>");
@@ -45,6 +45,7 @@ public class LoginServlet extends HttpServlet {
             }
         }else {
             //si la cookie no existe redirigimos a la vista login.jsp
+            req.setAttribute("title", req.getAttribute("title") + " - Login");
             getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
         }
 

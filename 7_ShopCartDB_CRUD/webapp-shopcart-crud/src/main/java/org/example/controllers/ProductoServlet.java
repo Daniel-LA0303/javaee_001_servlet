@@ -36,60 +36,10 @@ public class ProductoServlet extends HttpServlet {
         //pasamos las variables a la vista|
         request.setAttribute("productos", productos);
         request.setAttribute("username", sesionUsername);
+        request.setAttribute("title", request.getAttribute("title") + " - Productos");
 
         //pasando la lista de productos a la vista listar.jsp
         getServletContext().getRequestDispatcher("/listar.jsp").forward(request, response);
-
-        //obteniendo el mensaje de la sesion
-        /*String message = (String) request.getAttribute("message");
-        String messageGlobal = (String) getServletContext().getAttribute("message");
-
-        response.setContentType("text/html;charset=UTF-8");
-
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("   <head>");
-            out.println("       <title>Productos</title>");
-            out.println("   </head>");
-            out.println("   <body>");
-            out.println("       <h1>Productos</h1>");
-            //proteginedo la vista
-            if (sesionUsername.isPresent()) {
-                out.println("       <div style='color: blue'>Usuario: " + sesionUsername.get() + "</div>");
-                out.println("       <p><a href=\"" + request.getContextPath() + "/productos.json" + "\"> Exportar a JSON</a></p>");
-            }
-            out.println("       <table>");
-            out.println("           <thead>");
-            out.println("               <tr>");
-            out.println("                   <th>Id</th>");
-            out.println("                   <th>Nombre</th>");
-            //proteginedo la vista
-            if (sesionUsername.isPresent()) {
-                out.println("                   <th>Precio</th>");
-            }
-            out.println("               </tr>");
-            out.println("           </thead>");
-            out.println("           <tbody>");
-            for (Producto producto : productos) {
-                out.println("           <tr>");
-                out.println("               <td>" + producto.getId() + "</td>");
-                out.println("               <td>" + producto.getNombre() + "</td>");
-                //proteginedo la vista
-                if (sesionUsername.isPresent()) {
-                    out.println("               <td>" + producto.getPrecio() + "</td>");
-                    //para agregar un nuevo producto al carrito
-                    out.println("               <td><a href=\"" + request.getContextPath() + "/agregar-carro?id=" + producto.getId() + "\">Agregar al carro</a></td>");
-                }
-                out.println("           </tr>");
-            }
-            out.println("           </tbody>");
-            out.println("       </table>");
-            out.print("       <p>"+ message +"</p>");
-            out.print("       <p>"+ messageGlobal +"</p>");
-            out.println("   </body>");
-            out.println("</html>");
-        }*/
     }
 
 }
