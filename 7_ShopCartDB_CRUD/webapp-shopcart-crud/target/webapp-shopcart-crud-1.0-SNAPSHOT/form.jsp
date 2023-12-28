@@ -1,17 +1,10 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" import="java.util.*, java.time.format.*, org.example.models.*"%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" import="java.util.*, java.time.format.*, org.example.models.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:set var="categorias" value="${requestScope.categorias}" />
+<c:set var="errores" value="${requestScope.errores}" />
+<c:set var="producto" value="${requestScope.producto}" />
 
-<%
-    List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias");
-    Map<String, String> errores = (Map<String, String>) request.getAttribute("errores");
-
-    Producto producto = (Producto) request.getAttribute("producto");
-    System.out.println(producto.getId());
-String fecha = producto.getFechaRegisto() != null?
-producto.getFechaRegisto().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")): "";
-
-
-%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,53 +15,55 @@ producto.getFechaRegisto().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")): ""
 <body>
     <h1>Formulario</h1>
 
-    <form action="<%=request.getContextPath()%>/producto/form" method="post">
+    <form action="${pageContext.request.contextPath}/producto/form" method="post">
         <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" id="nombre" placeholder="Nombre" value="<%=producto.getNombre() != null ? producto.getNombre() : ""%>">
+        <input type="text" name="nombre" id="nombre" placeholder="Nombre" value="${producto.nombre != null ? producto.nombre : ''}">
 
-        <% if(errores !=null && errores.containsKey("nombre")){ %>
-            <p style="color: red"><%=errores.get("nombre")%></p>
-        <% } %>
+        <c:if test="${errores != null && errores.containsKey('nombre')}">
+            <p style="color: red">${errores['nombre']}</p>
+        </c:if>
         <br>
 
         <label for="precio">Precio</label>
-        <input type="number" name="precio" id="precio" placeholder="Precio" value="<%=producto.getPrecio() != 0 ? producto.getPrecio() : ""%>">
-        <% if(errores != null && errores.containsKey("precio")) { %>
-            <p style="color: red"><%=errores.get("precio")%></p>
-        <% } %>
-        <br>
+        <input type="number" name="precio" id="precio" placeholder="Precio" value="${producto.precio != 0 ? producto.precio : ''}">
 
+        <c:if test="${errores != null && errores.containsKey('precio')}">
+            <p style="color: red">${errores['precio']}</p>
+        </c:if>
+        <br>
 
         <label for="sku">Sku</label>
-        <input type="text" name="sku" id="sku" placeholder="Sku" value="<%=producto.getSku() != null ? producto.getSku() : ""%>">
-        <% if(errores !=null && errores.containsKey("sku")){ %>
-            <p style="color: red"><%=errores.get("sku")%></p>
-        <% } %>
+        <input type="text" name="sku" id="sku" placeholder="Sku" value="${producto.sku != null ? producto.sku : ''}">
+
+        <c:if test="${errores != null && errores.containsKey('sku')}">
+            <p style="color: red">${errores['sku']}</p>
+        </c:if>
         <br>
 
-        <label for="fecha_registro">Feach Registro</label>
-        <input type="date" name="fecha_registro" id="fecha_registro" placeholder="Fecha Registro" value="<%=fecha%>">
-        <% if(errores != null && errores.containsKey("fecha_registro")) { %>
-            <p style="color: red"><%=errores.get("fecha_registro")%></p>
-        <% } %>
-        <br>
+        <label for="fecha_registro">Fecha Registro</label>
+        <input type="date" name="fecha_registro" id="fecha_registro" placeholder="Fecha Registro" value="${producto.fechaRegisto != null ? producto.fechaRegisto.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")): ""}">
 
+        <c:if test="${errores != null && errores.containsKey('fecha_registro')}">
+            <p style="color: red">${errores['fecha_registro']}</p>
+        </c:if>
+        <br>
 
         <label for="categoria">Categoria</label>
         <select name="categoria" id="categoria">
             <option value="">------Seleccionar-------</option>
-            <% for (Categoria categoria : categorias) { %>
-                <option value="<%=categoria.getId()%>" <%=categoria.getId().equals(producto.getCategoria().getId()) ? "selected" : ""%>>
-                <%=categoria.getNombre()%></option>
-            <% } %>
+            <c:forEach var="categoria" items="${categorias}">
+                <option value="${categoria.id}" ${categoria.id == producto.categoria.id ? 'selected' : ''}>
+                    ${categoria.nombre}
+                </option>
+            </c:forEach>
         </select>
-        <% if(errores !=null && errores.containsKey("categoria")){ %>
-            <p style="color: red"><%=errores.get("categoria")%></p>
-        <% } %>
 
-
-        <input type="submit" value="<%=producto.getId() != null ? "Actualizar" : "Guardar"%>">
-        <input type="hidden" name="id" value="<%=producto.getId()%>">
+        <c:if test="${errores != null && errores.containsKey('categoria')}">
+            <p style="color: red">${errores['categoria']}</p>
+        </c:if>
+        <br>
+        <input type="submit" value="${producto.id != null ? 'Actualizar' : 'Guardar'}">
+        <input type="hidden" name="id" value="${producto.id}">
     </form>
 </body>
 </html>

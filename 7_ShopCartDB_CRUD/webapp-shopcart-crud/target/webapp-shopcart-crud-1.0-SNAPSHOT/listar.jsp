@@ -1,14 +1,5 @@
-<%@page contentType="UTF-8" import="java.util.*, org.example.models.*"%>
-
-
-<%
-    //Obtenemos los atributos de la request
-    List<Producto> productos = (List<Producto>) request.getAttribute("productos");
-    Optional<String> username = (Optional<String>) request.getAttribute("username");
-    //obteniendo el mensaje de la sesion
-    String message = (String) request.getAttribute("message");
-    String messageGlobal = (String) getServletContext().getAttribute("message");
-%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,42 +8,44 @@
     <title>Listado</title>
 </head>
 <body>
-  <h1>Listado de productos</h1>
-    <% if(username.isPresent()){%>
-    <div>Hola, <%=username.get()%> bienvenido</div>
-    <a href="<%=request.getContextPath()%>/producto/form">Agregar producto</a>
-   <% } %>
+    <h1>Listado de productos</h1>
+
+    <c:if test="${username.present}">
+        <div>Hola, <c:out value="${username.get()}"/></div>
+        <a href="${pageContext.request.contextPath}/producto/form">Agregar producto</a>
+    </c:if>
+
     <table>
         <tr>
-          <td>Id</td>
-          <td>Nombre</td>
-          <td>Tipo</td>
-          <% if(username.isPresent()){%>
-          <td>Precio</td>
-          <td>Agregar</td>
-          <td>Editar</td>
-          <% } %>
+            <td>Id</td>
+            <td>Nombre</td>
+            <td>Tipo</td>
+            <c:if test="${username.present}">
+                <td>Precio</td>
+                <td>Agregar</td>
+                <td>Editar</td>
+            </c:if>
         </tr>
-        <% for (Producto p : productos) { %>
-        <tr>
-          <td><%=p.getId()  %></td>
-          <td><%=p.getNombre()  %></td>
-          <td><%=p.getCategoria().getNombre()  %></td>
-          <% if(username.isPresent()){%>
-          <td><%=p.getPrecio()  %></td>
-          <td><a href="<%=request.getContextPath()%>/agregar-carro?id=<%=p.getId()%>">Agregar al carrito</a></td>
-          <td><a href="<%=request.getContextPath()%>/producto/form?id=<%=p.getId()%>">Editar</a></td>
-          <td><a
-            onclick="return confirm('¿Estas seguro de eliminar el producto <%=p.getNombre()%>?')"
-          href="<%=request.getContextPath()%>/producto/eliminar?id=<%=p.getId()%>">Eliminar</a></td>
-          <% } %>
-        </tr>
-        <% } %>
+
+        <c:forEach var="p" items="${productos}">
+            <tr>
+                <td><c:out value="${p.id}"/></td>
+                <td><c:out value="${p.nombre}"/></td>
+                <td><c:out value="${p.categoria.nombre}"/></td>
+                <c:if test="${username.present}">
+                    <td><c:out value="${p.precio}"/></td>
+                    <td><a href="${pageContext.request.contextPath}/agregar-carro?id=<c:out value="${p.id}"/>">Agregar al carrito</a></td>
+                    <td><a href="${pageContext.request.contextPath}/producto/form?id=<c:out value="${p.id}"/>">Editar</a></td>
+                    <td>
+                        <a onclick="return confirm('¿Estás seguro de eliminar el producto?');"
+                           href="${pageContext.request.contextPath}/producto/eliminar?id=<c:out value="${p.id}"/>">Eliminar</a>
+                    </td>
+                </c:if>
+            </tr>
+        </c:forEach>
     </table>
 
-    <p><%=message%></p>
-    <p><%=messageGlobal%></p>
-
-
+    <p>${applicationScope.message}</p>
+    <p>${requestScope.message}</p>
 </body>
 </html>
