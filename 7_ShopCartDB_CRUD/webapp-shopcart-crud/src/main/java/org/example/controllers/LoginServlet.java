@@ -11,6 +11,9 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.Optional;
 
+/**
+ * Servlet Login donde se trabajan los metodos GET y POST
+ */
 @WebServlet({"/login", "/login.html"})
 public class LoginServlet extends HttpServlet {
 
@@ -18,14 +21,24 @@ public class LoginServlet extends HttpServlet {
     final static String PASSWORD = "1234";
 
 
-    //Método que se ejecuta cuando se hace una petición GET
+    /**
+     * El metodo get ejecuta dos escenarios, cuando ya se logeo y cuando aun no
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //obtenemos el valor de la cookie username
+        /**
+         * obtenemos el valor de la cookie username
+         */
         LoginService auth = new LoginServiceSesionImpl();
         Optional<String> sesionUsername = auth.getUsername(req);
 
-        if (sesionUsername.isPresent()) { //si la cookie existe
+        
+        if (sesionUsername.isPresent()) { 
+        	/**
+        	 * Primer escenario
+        	 * el usuario ya se logeo por lo que al ser redirigido mostrara un 
+        	 * HTML sencillo con un mensaje
+        	 */
             try(PrintWriter out = resp.getWriter()){
 
                 out.println("<!DOCTYPE html>");
@@ -44,7 +57,10 @@ public class LoginServlet extends HttpServlet {
                 out.println("</html>");
             }
         }else {
-            //si la cookie no existe redirigimos a la vista login.jsp
+            /**
+             * Si la cookie no existe redirigimos a la vista login.jsp
+             * ya que aun no hay un usuario logeado
+             */
             req.setAttribute("title", req.getAttribute("title") + " - Login");
             getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
         }
@@ -52,24 +68,35 @@ public class LoginServlet extends HttpServlet {
 
     }
 
+    /**
+     * El metodo POST se ejecuta cuando se hace clic
+     * y habra una validacion del usuario
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username"); //obtenemos el valor del parámetro username
-        String password = request.getParameter("password"); //obtenemos el valor del parámetro password
+    	/**
+    	 * Obtenemos los parametros enviados desde la vista
+    	 */
+        String username = request.getParameter("username"); 
+        String password = request.getParameter("password"); 
 
-        //comprobamos si el usuario y la contraseña son correctos
+        /**
+         * comprobamos si el usuario y la contraseña son correctos
+         * Empezamos implementando 
+         */
         UsuarioService usuarioService = new UsuarioServiceImpl((Connection) request.getAttribute("conn"));
         Optional<Usuario> usuario = usuarioService.login(username, password);
 
-        if (usuario.isPresent()) { //si el usuario y la contraseña son correctos
+        /**
+         * si el usuario y la contraseña son correctos entonces se crea un sesion
+         */
+        if (usuario.isPresent()) { 
             //Sesiones
             HttpSession sesion =  request.getSession();
             sesion.setAttribute("username", username);
 
             //Redirección
             response.sendRedirect(request.getContextPath() + "/login.html"); //redirigimos a la ruta /productos
-
-
         } else {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Usuario o contraseña incorrectos"); //enviamos un error 401
         }
